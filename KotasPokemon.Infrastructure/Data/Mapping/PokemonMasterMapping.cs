@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace KotasPokemon.Infrastructure.Data.Mapping
 {
-    class PokemonMasterMapping : IEntityTypeConfiguration<PokemonMaster>
+    public class PokemonMasterMapping : IEntityTypeConfiguration<PokemonMaster>
     {
         public void Configure(EntityTypeBuilder<PokemonMaster> builder)
         {

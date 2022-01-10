@@ -32,6 +32,10 @@ namespace KotasPokemonApi
 
             services.AddAutoMapper(new[] { Assembly.GetExecutingAssembly() });
 
+            services.AddFluentValidationSetup();
+
+            services.AddMiddlewareSetup();
+
             services.AddSwaggerSetup();
 
             services.AddCors();

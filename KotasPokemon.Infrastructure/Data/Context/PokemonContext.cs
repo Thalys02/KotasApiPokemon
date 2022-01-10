@@ -12,6 +12,7 @@ namespace KotasPokemon.Infrastructure.Data.Context
         public PokemonContext(DbContextOptions<PokemonContext> options) : base(options)
         { }
         public DbSet<PokemonMaster> PokemonMasters { get; set; }
+        public DbSet<PokemonCaptured> PokemonsCaptured { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfigurationsFromAssembly(typeof(PokemonContext).Assembly);

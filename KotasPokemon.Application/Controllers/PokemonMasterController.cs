@@ -12,15 +12,15 @@ namespace KotasPokemon.Application.Controllers
     [Route("api/[controller]")]
     public class PokemonMasterController : Controller
     {
-        public readonly IPokemonRepository _pokemonRepository;
         public IMapper _mapper;
+        public readonly IPokemonRepository _pokemonRepository;
         public PokemonMasterController(
-                                        IPokemonRepository repository,
-                                        IMapper mapper
+                                        IMapper mapper,
+                                        IPokemonRepository repository
                                       )
         {
-            _pokemonRepository = repository;
             _mapper = mapper;
+            _pokemonRepository = repository;
         }
         [HttpGet]
         public IActionResult AllPokemonMasters()

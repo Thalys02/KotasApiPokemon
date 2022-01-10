@@ -17,8 +17,8 @@ namespace KotasPokemon.Application.Controllers
         private readonly IMapper _mapper;
         public readonly IPokemonRepository _pokemonRepository;
         public PokemonController(
-                                    IPokemonRepository repository,
-                                    IMapper mapper
+                                 IPokemonRepository repository,
+                                 IMapper mapper
                                 )
         {
             _pokemonRepository = repository;

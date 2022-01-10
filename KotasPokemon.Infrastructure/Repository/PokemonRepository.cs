@@ -40,7 +40,6 @@ namespace KotasPokemon.Infrastructure.Repository
             return _context.Set<PokemonCaptured>().Include(i => i.PokemonMaster).AsNoTracking().Select(s => new { s.PokemonId, s.PokemonName, PokemonMasterName = s.PokemonMaster.Name }).AsQueryable();
         }
 
-
         public async Task<BaseDataPokemonResponseDTO> GetEspecificPokemon(int pokemonId)
         {
 
@@ -90,6 +89,7 @@ namespace KotasPokemon.Infrastructure.Repository
 
             return listPokemon;
         }
+
         public async Task AddPokemonMaster(PokemonMaster entity)
         {
             try
@@ -113,19 +113,17 @@ namespace KotasPokemon.Infrastructure.Repository
 
                 var resultCapturePokemon = new ResultTryCapturePokemon();
 
-                var pokemon = await GetEspecificPokemon(dto.PokemonId);
-
-                pokemon.CaptureRate = await GetCaptureRate(pokemon.Id);
+                var pokemon = await GetEspecificPokemon(dto.PokemonId); 
 
                 var chance = random.Next(1, MAX_NUMBER_RATE_CAPTURE_POKEMON);
 
                 resultCapturePokemon.Pokemon = pokemon;
 
-                resultCapturePokemon.CaptureRate = pokemon.CaptureRate;
+                resultCapturePokemon.CaptureRate = await GetCaptureRate(pokemon.Id);
 
                 resultCapturePokemon.percentageSuccess = Convert.ToDouble(resultCapturePokemon.CaptureRate) / Convert.ToDouble(MAX_NUMBER_RATE_CAPTURE_POKEMON) * 100;
 
-                if (chance <= pokemon.CaptureRate)
+                if (chance <= resultCapturePokemon.CaptureRate)
                 {
                     resultCapturePokemon.PokemonCaptured = true;
 
@@ -142,6 +140,7 @@ namespace KotasPokemon.Infrastructure.Repository
                 throw ex;
             }
         }
+
         public async Task AddPokemonCaptured(PokemonCaptured entity)
         {
             try
@@ -170,6 +169,7 @@ namespace KotasPokemon.Infrastructure.Repository
             return resultPokemon.Capture_Rate;
 
         }
+
         private async static Task<string> ConvertUrlToImageBase64(string url)
         {
             using var client = new HttpClient();
